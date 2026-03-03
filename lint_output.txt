@@ -1,0 +1,67 @@
+﻿
+> vite_react_shadcn_ts@0.0.0 lint
+> eslint .
+
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\server\src\middleware\auth.ts
+  22:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  22:52  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\server\src\routes\permissions.ts
+  46:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\server\src\routes\subscription.ts
+  12:32  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  50:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  52:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\server\src\routes\users.ts
+   75:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  107:28  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\server\src\seed.ts
+  31:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  40:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\server\src\sync-turso.ts
+  38:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\server\sync-turso.ts
+  24:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  43:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\src\components\ui\badge.tsx
+  29:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\src\components\ui\button.tsx
+  47:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\src\components\ui\command.tsx
+  24:11  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\src\components\ui\form.tsx
+  129:10  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\src\components\ui\navigation-menu.tsx
+  111:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\src\components\ui\sidebar.tsx
+  636:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\src\components\ui\sonner.tsx
+  27:19  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\src\components\ui\textarea.tsx
+  5:18  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\src\components\ui\toggle.tsx
+  37:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\src\pages\Login.tsx
+  50:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\PC MASTER BD\Desktop\bill hisab bd\tailwind.config.ts
+  107:13  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+Γ£û 24 problems (17 errors, 7 warnings)
+

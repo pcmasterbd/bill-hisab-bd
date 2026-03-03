@@ -1,0 +1,28 @@
+import './env.js';
+console.log('1. Env loaded');
+import { prisma } from './db.js';
+console.log('2. DB loaded');
+import authRouter from './routes/auth.js';
+console.log('3. Auth loaded');
+import userRouter from './routes/users.js';
+console.log('4. Users loaded');
+import subscriptionRouter from './routes/subscription.js';
+console.log('5. Subscription loaded');
+import permissionsRouter from './routes/permissions.js';
+console.log('6. Permissions loaded');
+import productRouter from './routes/products.js';
+console.log('7. Products loaded');
+import customerRouter from './routes/customers.js';
+console.log('8. Customers loaded');
+import orderRouter from './routes/orders.js';
+console.log('9. Orders loaded');
+import supplierRouter from './routes/suppliers.js';
+console.log('10. Suppliers loaded');
+import companyOrderRouter from './routes/companyOrders.js';
+console.log('11. CompanyOrders loaded');
+import wholesaleOrderRouter from './routes/wholesaleOrders.js';
+console.log('12. WholesaleOrders loaded');
+import courierRouter from './routes/couriers.js';
+console.log('13. Couriers loaded');
+
+console.log('All imports successful!');

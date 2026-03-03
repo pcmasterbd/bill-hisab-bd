@@ -1,0 +1,212 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    String             @id @default(uuid())
+  email                 String             @unique
+  password              String
+  name                  String?
+  phone                 String?
+  profilePicture        String?
+  role                  Role               @default(USER)
+  subscriptionStatus    SubscriptionStatus @default(INACTIVE)
+  subscriptionExpiresAt DateTime?
+  trialExpiresAt        DateTime?
+  trialUsed             Boolean            @default(false)
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+  webhooks              Webhook[]
+}
+
+model Webhook {
+  id        String   @id @default(uuid())
+  userId    String
+  url       String
+  event     String   // e.g., "ORDER_CREATED", "STOCK_LOW"
+  isActive  Boolean  @default(true)
+  secret    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  module      String
+  action      String
+  description String?
+  admin       Boolean  @default(true)
+  moderator   Boolean  @default(false)
+  user        Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Product {
+  id          String      @id @default(uuid())
+  name        String
+  description String?
+  price       Float
+  wholesalePrice Float    @default(0)
+  stock       Int         @default(0)
+  category    String?
+  isRawMaterial Boolean   @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  orderItems        OrderItem[]
+  companyOrderItems CompanyOrderItem[]
+}
+
+model Customer {
+  id        String   @id @default(uuid())
+  name      String
+  phone     String   @unique
+  district  String?
+  thana     String?
+  address   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+  payments  Payment[]
+}
+
+model Order {
+  id            String      @id @default(uuid())
+  customerId    String
+  totalAmount   Float
+  discount      Float       @default(0)
+  advance       Float       @default(0)
+  payableAmount Float
+  status        OrderStatus @default(PENDING)
+  orderType     OrderType   @default(REGULAR)
+  laborCost     Float       @default(0)
+  paidAmount    Float       @default(0)
+  isDeleted     Boolean     @default(false)
+  note          String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  customer      Customer    @relation(fields: [customerId], references: [id])
+  items         OrderItem[]
+  payments      Payment[]
+}
+
+enum OrderType {
+  REGULAR
+  WHOLESALE
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float
+  product   Product @relation(fields: [productId], references: [id])
+  order     Order   @relation(fields: [orderId], references: [id])
+}
+
+enum Role {
+  ADMIN
+  USER
+  MODERATOR
+}
+
+enum SubscriptionStatus {
+  INACTIVE
+  TRIAL
+  ACTIVE
+  EXPIRED
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model Supplier {
+  id            String         @id @default(uuid())
+  name          String
+  contactPerson String?
+  phone         String         @unique
+  email         String?
+  address       String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  companyOrders CompanyOrder[]
+}
+
+model CompanyOrder {
+  id          String             @id @default(uuid())
+  supplierId  String
+  totalAmount Float
+  status      CompanyOrderStatus @default(DRAFT)
+  note        String?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  supplier    Supplier           @relation(fields: [supplierId], references: [id])
+  items       CompanyOrderItem[]
+}
+
+model CompanyOrderItem {
+  id           String       @id @default(uuid())
+  orderId      String
+  productId    String
+  quantity     Int
+  costPrice    Float
+  product      Product      @relation(fields: [productId], references: [id])
+  companyOrder CompanyOrder @relation(fields: [orderId], references: [id])
+}
+
+enum CompanyOrderStatus {
+  DRAFT
+  SENT
+  COMPLETED
+  CANCELLED
+}
+
+model CourierConfig {
+  id           String   @id @default(uuid())
+  name         String   @unique // e.g., "Steadfast", "Pathao", "RedX", "Paperfly"
+  isActive     Boolean  @default(false)
+  apiKey       String?
+  apiSecret    String?
+  apiBaseUrl   String?  // Optional: for custom endpoints
+  senderId     String?  // Optional: for SMS/tracking
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Report {
+  id          String   @id @default(uuid())
+  title       String
+  type        String   // e.g., "SALES", "INVENTORY", "PROFIT"
+  periodStart DateTime
+  periodEnd   DateTime
+  data        String   // JSON string of snapshot data
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Payment {
+  id            String   @id @default(uuid())
+  orderId       String?
+  customerId    String?
+  amount        Float
+  method        String   // e.g., "CASH", "BKASH", "BANK"
+  type          String   @default("INCOME") // "INCOME" or "EXPENSE"
+  transactionId String?
+  note          String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  order         Order?    @relation(fields: [orderId], references: [id])
+  customer      Customer? @relation(fields: [customerId], references: [id])
+}

@@ -1,0 +1,10 @@
+﻿[dotenv@17.3.1] injecting env (0) from .env -- tip: ΓÜÖ∩╕Å  enable debug logging with { debug: true }
+1. Imports done
+URL defined: true
+Token defined: true
+2. Calling createClient...
+3. LibSQL client created
+4. Calling new PrismaLibSql...
+5. Adapter created
+6. Calling new PrismaClient...
+Test finished
