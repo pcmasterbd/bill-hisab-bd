@@ -69,7 +69,7 @@ router.post('/', authorizeRole(['ADMIN', 'MODERATOR', 'USER']), async (req: Requ
 
 // DELETE a payment record
 router.delete('/:id', authorizeRole(['ADMIN']), async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const id = req.params.id as string;
     try {
         await prisma.$transaction(async (tx) => {
             const payment = await tx.payment.findUnique({ where: { id } });
