@@ -90,9 +90,15 @@ router.post('/login', async (req: Request, res: Response) => {
 
         const { password: _, ...userWithoutPassword } = user;
         res.json({ message: 'লগইন সফল হয়েছে (Login successful)', user: userWithoutPassword, token });
-    } catch (error) {
-        console.error('Login error:', error);
-        res.status(500).json({ error: 'লগইন ব্যর্থ হয়েছে (Login failed)' });
+    } catch (error: any) {
+        console.error('CRITICAL LOGIN ERROR:', error);
+        // If it's a Prisma error, we want to know
+        const errorMessage = error.message || 'Login failed';
+        res.status(500).json({
+            error: 'লগইন ব্যর্থ হয়েছে (Login failed)',
+            details: process.env.NODE_ENV === 'development' ? errorMessage : undefined,
+            code: error.code // Prisma error codes are useful
+        });
     }
 });
 
